@@ -1,0 +1,5 @@
+ #Python=2.7
+ selenium>=3.0.2
+ certifi 
+ bs4 
+ pycurl>=7.43.0

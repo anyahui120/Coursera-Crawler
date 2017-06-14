@@ -4,13 +4,13 @@ This is a simple crawler for coursera.
 
 1. Enviroment setup
 
-  1.1 Python 2.7(Recommend to install anaconda)
+      1.1 Python 2.7(Recommend to install anaconda)
   
-  1.2 Install some packages included in requirements.txt
+      1.2 Install some packages included in requirements.txt
   
 	  pip install -r requirements.txt
   
-  1.3 Download Phantomjs from website, install it and write the installed path to config.yml
+      1.3 Download Phantomjs from website, install it and write the installed path to config.yml
 
 2. config.yml
 

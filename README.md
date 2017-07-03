@@ -1,12 +1,13 @@
 # Coursera-Crawler
-A crawler for Coursera
-This is a simple crawler for coursera.
+A crawler to scrape Coursera's discussion forum.
+
+High-level code flow is documented <a href="https://github.com/anyahui120/Coursera-Crawler/blob/master/diagram.jpg"> here</a>.
 
 1. Enviroment setup
 
-      1.1 Python 2.7(Recommend to install anaconda)
+      1.1 Python 2.7 (We recommend to set it up with anaconda)
   
-      1.2 Install some packages included in requirements.txt
+      1.2 Install the packages specified in requirements.txt
   
 	      pip install -r requirements.txt
   
@@ -34,5 +35,3 @@ This is a simple crawler for coursera.
 
 	python CourseraScraper.py
 	The crawled data will be saved in folders. Every course has a folder named as courseName_courseID_crawlTime(%Y_%m_%d)
-
-

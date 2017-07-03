@@ -34,6 +34,5 @@ This is a simple crawler for coursera.
 
 	python CourseraScraper.py
 	The crawled data will be saved in folders. Every course has a folder named as courseName_courseID_crawlTime(%Y_%m_%d)
-	
 
 

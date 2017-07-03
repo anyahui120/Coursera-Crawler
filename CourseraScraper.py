@@ -22,8 +22,13 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 class CourseraScraper:
+    """This class is for crawling all the data in the discussion forums of Coursera.
+       Crawling courses that user has enrolled. 
+       Crawling the threads, posts and users(learner, mentor, instructor and staff) of every course.
+    """
 
     def __init__(self):
+        """ Inits CourseraScraper with driver and user account information."""
         with open('config.yml') as f:
             config = yaml.load(f)
         self.driver = webdriver.PhantomJS()
@@ -32,6 +37,8 @@ class CourseraScraper:
         self.courses = []
 
     def login(self):
+        """Login Coursera using PhantomJS simulating web browser without a graphical user interface. """
+        
         self.driver.get('https://www.coursera.org/?authMode=login')
         email_field = self.driver.find_element_by_name("email")
         password_field = self.driver.find_element_by_name("password")
@@ -40,7 +47,10 @@ class CourseraScraper:
         password_field.submit()
 
     def get_active_courses(self,activeCoursePageNum):
-        #get courseid by parsing the first page
+        """Courses are splitted into three types: "Last active", "Inactive" and "Completed".
+           Get courseids of last active courses by parsing the first page.
+        """
+     
         active_course_ids = []
         course_id_and_name = {}
         for i in range(1,(activeCoursePageNum+1),1):

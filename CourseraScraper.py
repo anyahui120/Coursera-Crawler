@@ -49,6 +49,14 @@ class CourseraScraper:
     def get_active_courses(self,activeCoursePageNum):
         """Courses are splitted into three types: "Last active", "Inactive" and "Completed".
            Get courseids of last active courses by parsing the first page.
+        
+        Args:
+            activeCoursePageNum: the number(int) of pages of last active courses.
+           
+        Returns:
+            active_course_ids: a list of course ids.
+            course_id_and_name: a dict mapping course ids to the course names.
+        
         """
      
         active_course_ids = []
@@ -79,7 +87,17 @@ class CourseraScraper:
         return active_course_ids, course_id_and_name
 
     def get_inactive_courses(self,inactiveCoursePageNum):
-        # get courseid by parsing the first page
+        """Courses are splitted into three types: "Last active", "Inactive" and "Completed".
+           Get courseids of  inactive courses by parsing the first page.
+        
+        Args:
+            inactiveCoursePageNum: the number(int) of pages of inactive courses.
+           
+        Returns:
+            inactive_course_ids: a list of course ids.
+            course_id_and_name: a dict mapping course ids to the course names.
+        
+        """
         inactive_course_ids = []
         course_id_and_name = {}
         for i in range(1,(inactiveCoursePageNum+1),1):
@@ -118,6 +136,16 @@ class CourseraScraper:
         return cookie
 
     def get_courseforum_id(self,COURSEID,COURSENAME,cookie):
+        """Get course_forum_id for constructing the API of threads.
+        
+        Args:
+            COURSEID: the id of the course(String), geting this value from get_active_courses() or get_inactive_courses().
+            COURSENAME: the name of the course(String), geting this value from get_active_courses() or get_inactive_courses().
+            cookie: the cookie for visiting the course discussion page.
+            
+        Returns:
+            rootCourseForumId: An id(String) for constructing the API of threads in next step.
+        """
         ForumUrlAPI = 'https://www.coursera.org/api/onDemandCourseForums.v1?q=course&courseId=%s&limit=500&fields=title,description,parentForumId,order,legacyForumId,forumType,forumQuestionCount,lastAnsweredAt,groupForums.v1(title,description,parentForumId,order,forumType)' % COURSEID
         c = pycurl.Curl()
         b = StringIO.StringIO()
@@ -149,6 +177,17 @@ class CourseraScraper:
             return rootCourseForumId
 
     def get_thread_info(self, rootCourseForumId, cookie,fileout,userId):
+        """Get thread information and write into file with json format.
+        
+        Args:
+            rootCourseForumId: An id(String) for constructing the API of threads.
+            cookie: the cookie for visiting the course discussion page.
+            fileout: the open file for writing thread data.
+            userId: id for user account got by analysing the APIs. 
+            
+        Returns:
+            threadsIdList: A list of thread id for constructing the API of posts in the next step.
+        """
         # get all the threads info available(the original post page info)
         threadsIdList = []
         threadUrl = 'https://www.coursera.org/api/onDemandCourseForumQuestions.v1/?userId=%s&shouldAggregate=true&includeDeleted=false&sort=lastActivityAtDesc&fields=content%%2Cstate%%2CcreatorId%%2CcreatedAt%%2CforumId%%2CsessionId%%2ClastAnsweredBy%%2ClastAnsweredAt%%2CupvoteCount%%2CfollowCount%%2CtotalAnswerCount%%2CtopLevelAnswerCount%%2CviewCount%%2CanswerBadge%%2CisFlagged%%2CisUpvoted%%2CisFollowing%%2ConDemandSocialProfiles.v1(userId%%2CexternalUserId%%2CfullName%%2CphotoUrl%%2CcourseRole)&includes=profiles&limit=15&q=byCourseForumId&courseForumId=%s' % (userId,rootCourseForumId)
@@ -205,8 +244,16 @@ class CourseraScraper:
         return threadsIdList
 
     def get_posts(self,threadId,cookie,fileoutPost,fileoutUser):
+        """Get post and user information and write into file with json format.
+        
+        Args:
+            threadId: An thread id(String) for constructing the API of posts.
+            cookie: the cookie for visiting the course discussion page.
+            fileoutPost: the open file for writing posts data.
+            fileoutUser: the open file for writing users data. 
+            
+        """
         postURL = 'https://www.coursera.org/api/onDemandCourseForumAnswers.v1/?q=byForumQuestionId&includeDeleted=false&fields=content%%2CforumQuestionId%%2CparentForumAnswerId%%2Cstate%%2CcreatorId%%2CcreatedAt%%2Corder%%2CupvoteCount%%2CchildAnswerCount%%2CisFlagged%%2CisUpvoted%%2ConDemandSocialProfiles.v1(userId%%2CexternalUserId%%2CfullName%%2CphotoUrl%%2CcourseRole)%%2ConDemandCourseForumAnswers.v1(content%%2CforumQuestionId%%2CparentForumAnswerId%%2Cstate%%2CcreatorId%%2CcreatedAt%%2Corder%%2CupvoteCount%%2CchildAnswerCount%%2CisFlagged%%2CisUpvoted)&includes=profiles%%2Cchildren&limit=15&userCourseQuestionId=%s&sort=createdAtDesc' % threadId
-       #Get total num and all the limited posts from postURL{elements:[], linked:{}, paging:{next:"15",total:20}}
         c = pycurl.Curl()
         b = StringIO.StringIO()
 
@@ -217,6 +264,7 @@ class CourseraScraper:
         c.setopt(pycurl.COOKIE, cookie)
         c.perform()
         json_data = b.getvalue()
+        #Get total num and all the limited posts from postURL{elements:[], linked:{}, paging:{next:"15",total:20}}
         totalAnswerCount = json.loads(json_data)['paging']['total']
         posts = json.loads(json_data)['elements']
         childPosts = json.loads(json_data)['linked']['onDemandCourseForumAnswers.v1']
@@ -268,6 +316,7 @@ class CourseraScraper:
                 childPost = childPosts[jjj]
                 fileoutPost.write(json.dumps(childPost, encoding='utf-8'))
                 fileoutPost.write('\n')
+    
     def writeToSql(self):
         pass
 

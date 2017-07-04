@@ -4,3 +4,4 @@ UserId: 105956
 filePath: ../data/
 activeCoursePageNum: 1
 inactiveCoursePageNum: 25
+phantomjsPath: (For example, on Windows, you can write 'XXX/bin/phantomjs.exe')

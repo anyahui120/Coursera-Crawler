@@ -11,26 +11,27 @@ High-level code flow is documented <a href="https://github.com/anyahui120/Course
   
 	      pip install -r requirements.txt
   
-      1.3 Download Phantomjs <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip"> here</a> for Windows, <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip"> here</a> for MacOS and <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"> here</a> for Linux-64 bit( <a href="http://phantomjs.org/download.html"> Other references</a>), install it and add it to your PATH environment variable.
+      1.3 Download Phantomjs <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip"> here</a> for Windows, <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip"> here</a> for MacOS and <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"> here</a> for Linux-64 bit( <a href="http://phantomjs.org/download.html"> Other references</a>), install it and add the path to 'phantomjsPath' of config.yml.
 
 2. config.yml
 
-	"UserName" is the username for coursera account;
+	<1> "UserName" is the username for coursera account;
 	
-	"Password" is the password for coursera account;
+	<2> "Password" is the password for coursera account;
 	
-	"UserId" is the ID for every account.
+	<3> "UserId" is the ID for every account.
 	    
 	    First, you have to login using your coursera account on the website. Then press F12, select "Network" and choose XHR. 
 	    
 	    You can see an API link "https://www.coursera.org/api/openCourseMemberships.v1/?q=findByUser&userId=XXX", your userid is "XXX".
 	
-	"filePath" is the path to save the data you crawled.
+	<4> "filePath" is the path to save the data you crawled.
   
         When you login, you will see "My Courses", including "Last Active" and "Inactive".
-	"activeCoursePageNum" is the maximum pages of your "Last Active" courses you want to crawl.
-	"inactiveCoursePageNum" is the maximum pages of your "Inactive" courses you want to crawl.
-
+	<5> "activeCoursePageNum" is the maximum pages of your "Last Active" courses you want to crawl.
+	<6> "inactiveCoursePageNum" is the maximum pages of your "Inactive" courses you want to crawl.
+        <7> "phantomjsPath" is the executable file path of phantomjs.
+	
 3. CourseraScraper.py
 
 	python CourseraScraper.py

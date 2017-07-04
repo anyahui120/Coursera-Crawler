@@ -28,8 +28,11 @@ High-level code flow is documented <a href="https://github.com/anyahui120/Course
 	<4> "filePath" is the path to save the data you crawled.
   
         When you login, you will see "My Courses", including "Last Active" and "Inactive".
+	
 	<5> "activeCoursePageNum" is the maximum pages of your "Last Active" courses you want to crawl.
+	
 	<6> "inactiveCoursePageNum" is the maximum pages of your "Inactive" courses you want to crawl.
+	
         <7> "phantomjsPath" is the executable file path of phantomjs.
 	
 3. CourseraScraper.py

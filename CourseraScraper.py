@@ -31,7 +31,8 @@ class CourseraScraper:
         """ Inits CourseraScraper with driver and user account information."""
         with open('config.yml') as f:
             config = yaml.load(f)
-        self.driver = webdriver.PhantomJS()
+        phantomjs_path = config['phantomjsPath']
+        self.driver = webdriver.PhantomJS(phantomjs_path)
         self.email = config['UserName']
         self.password = config['Password']
         self.courses = []

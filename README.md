@@ -11,6 +11,7 @@ High-level code flow is documented <a href="https://github.com/anyahui120/Course
   
 	      pip install -r requirements.txt
   
+      For non-root users, please refer to <a href="http://pycurl.io/docs/latest/install.html">PycURL</a> and <a href="https://github.com/anyahui120/Non-root-users-to-use-pip">Non-root users to use pip</a> to setup your environment.
       1.3 Download Phantomjs <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip"> here</a> for Windows, <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip"> here</a> for MacOS and <a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2"> here</a> for Linux-64 bit( <a href="http://phantomjs.org/download.html"> Other references</a>), install it and add the path to 'phantomjsPath' of config.yml.
 
 2. config.yml

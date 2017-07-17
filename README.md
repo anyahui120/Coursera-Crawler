@@ -27,11 +27,9 @@ High-level code flow is documented <a href="https://github.com/anyahui120/Course
 	    
 	    You can see an API link "https://www.coursera.org/api/openCourseMemberships.v1/?q=findByUser&userId=XXX", your userid is "XXX".
 	
-	<4> "filePath" is the path to save the data you crawled.
-  
-        When you login, you will see "My Courses", including "Last Active" and "Inactive".
+	<4> "filePath" is the path to save the data you crawled(Choose or make your preferred saving path).
 	
-	<5> "activeCoursePageNum" is the maximum pages of your "Last Active" courses you want to crawl.
+	<5> "activeCoursePageNum" is the maximum pages of your "Last Active" courses you want to crawl.(When you login, you will see "My Courses", including "Last Active" and "Inactive".)
 	
 	<6> "inactiveCoursePageNum" is the maximum pages of your "Inactive" courses you want to crawl.
 	
